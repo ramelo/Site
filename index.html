@@ -2,575 +2,895 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Punkanagem - Entrega Garantida!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punkanagem — Entrega que vai além</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* === 90s GEOCITIES VIBES === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --charcoal: #2c2c2c;
+      --mid: #6b6b6b;
+      --light: #a8a8a8;
+      --border: #e8e8e8;
+      --bg: #ffffff;
+      --bg-soft: #f7f7f5;
+      --accent: #e8a020;
+      --accent-dark: #c4861a;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      background-color: #000080;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='10' height='10' fill='%23000090'/%3E%3Crect x='10' y='10' width='10' height='10' fill='%23000090'/%3E%3C/svg%3E");
-      color: #ffff00;
-      font-family: "Comic Sans MS", "Courier New", monospace;
-      margin: 0;
-      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Marquee bar */
-    .marquee-bar {
-      background-color: #ff0000;
-      color: #ffffff;
-      font-weight: bold;
-      font-size: 14px;
-      padding: 4px 0;
-      border-top: 3px solid #ffff00;
-      border-bottom: 3px solid #ffff00;
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 72px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
     }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
 
-    /* Main container */
-    .main-table {
-      width: 780px;
-      margin: 10px auto;
-      background-color: #c0c0c0;
-      border: 4px ridge #ffffff;
-    }
-
-    /* Header */
-    .header {
-      background: linear-gradient(180deg, #ff6600, #ffcc00, #ff6600);
-      text-align: center;
-      padding: 10px;
-      border-bottom: 4px ridge #ffffff;
-    }
-
-    .site-title {
-      font-size: 48px;
-      font-weight: bold;
-      color: #000080;
-      text-shadow: 3px 3px #ff0000, -1px -1px #ffffff;
-      font-family: "Impact", "Arial Black", sans-serif;
-      letter-spacing: 2px;
-      margin: 0;
-    }
-
-    .site-subtitle {
-      font-size: 16px;
-      color: #000080;
-      font-weight: bold;
-      margin: 4px 0 0 0;
-      text-shadow: 1px 1px #ffff00;
-    }
-
-    .blink {
-      animation: blinker 0.8s step-start infinite;
-      color: #ff0000;
-      font-weight: bold;
-    }
-    @keyframes blinker { 50% { opacity: 0; } }
-
-    /* Nav bar */
-    .navbar {
-      background-color: #000080;
-      text-align: center;
-      padding: 6px;
-      border-top: 2px solid #ffffff;
-      border-bottom: 2px solid #ffffff;
-    }
-    .navbar a {
-      color: #ffff00;
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--black);
       text-decoration: none;
-      font-weight: bold;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
       font-size: 14px;
-      margin: 0 12px;
-      border: 2px outset #ffffff;
-      padding: 2px 10px;
-      background-color: #000080;
+      font-weight: 500;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+
+    .nav-cta {
+      background: var(--black);
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--charcoal) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 60px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 52%;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 5.5vw, 84px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--black);
+      margin-bottom: 28px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--mid);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .btn-primary {
+      background: var(--black);
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
       display: inline-block;
     }
-    .navbar a:hover {
-      background-color: #0000ff;
-      border-style: inset;
+    .btn-primary:hover { background: var(--charcoal); transform: translateY(-1px); }
+
+    .btn-ghost {
+      color: var(--charcoal);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.2s;
+    }
+    .btn-ghost:hover { gap: 14px; }
+    .btn-ghost::after { content: '→'; }
+
+    .hero-image-wrap {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 48%;
+      overflow: hidden;
+    }
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #ffffff 0%, transparent 30%);
+      z-index: 1;
     }
 
-    /* Content layout */
-    .content-area {
+    .hero-stats {
       display: flex;
-      gap: 0;
+      gap: 48px;
+      margin-top: 72px;
+    }
+    .stat-num {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--black);
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--mid);
+      margin-top: 4px;
     }
 
-    .left-sidebar {
-      width: 160px;
-      min-width: 160px;
-      background-color: #000080;
-      padding: 10px;
-      border-right: 3px ridge #ffffff;
-      text-align: center;
-    }
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 60px; }
 
-    .main-content {
-      flex: 1;
-      padding: 14px;
-      background-color: #c0c0c0;
-    }
-
-    .right-sidebar {
-      width: 160px;
-      min-width: 160px;
-      background-color: #000080;
-      padding: 10px;
-      border-left: 3px ridge #ffffff;
-      text-align: center;
-    }
-
-    /* Section boxes */
-    .section-box {
-      background-color: #ffffff;
-      border: 3px ridge #808080;
-      margin-bottom: 14px;
-      padding: 10px;
+    .section-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
     }
 
     .section-title {
-      background-color: #000080;
-      color: #ffff00;
-      font-weight: bold;
-      font-size: 15px;
-      padding: 3px 8px;
-      margin: -10px -10px 10px -10px;
-      border-bottom: 2px solid #ffff00;
-      text-align: center;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: var(--black);
+      max-width: 580px;
+      margin-bottom: 20px;
     }
 
-    /* Hero image */
-    .hero-img {
+    .section-sub {
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 460px;
+      margin-bottom: 60px;
+    }
+
+    /* ── FEATURES ── */
+    .features { background: var(--bg-soft); }
+
+    .features-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 28px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.07);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-soft);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 24px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* ── SERVICES ── */
+    .services-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .services-image {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .services-image img {
       width: 100%;
-      max-width: 420px;
-      border: 4px ridge #ff6600;
-      display: block;
-      margin: 0 auto 10px auto;
+      height: 100%;
+      object-fit: cover;
     }
 
-    /* Divider */
-    hr.retro {
-      border: none;
-      height: 4px;
-      background: repeating-linear-gradient(90deg, #ff0000, #ff0000 10px, #ffff00 10px, #ffff00 20px);
-      margin: 10px 0;
-    }
-
-    /* Services list */
     .services-list {
       list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .services-list li {
-      padding: 4px 0;
-      border-bottom: 1px dashed #808080;
-      font-size: 13px;
-      color: #000080;
-      font-weight: bold;
-    }
-    .services-list li::before {
-      content: ">> ";
-      color: #ff0000;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
-    /* Counter widget */
-    .counter-box {
-      background-color: #000000;
-      color: #00ff00;
-      font-family: "Courier New", monospace;
-      font-size: 22px;
-      font-weight: bold;
-      text-align: center;
-      border: 2px inset #808080;
-      padding: 4px;
-      letter-spacing: 4px;
+    .service-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: default;
+      transition: padding-left 0.2s;
+    }
+    .service-item:hover { padding-left: 8px; }
+    .service-item:first-child { border-top: 1px solid var(--border); }
+
+    .service-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--black);
+    }
+    .service-desc {
+      font-size: 13px;
+      color: var(--mid);
+      margin-top: 3px;
+    }
+    .service-arrow {
+      color: var(--light);
+      font-size: 18px;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .service-item:hover .service-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--black); color: #fff; }
+
+    .testimonials .section-tag { color: var(--accent); }
+    .testimonials .section-title { color: #fff; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 36px;
+    }
+
+    .testimonial-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 28px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .author-loc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    .stars-row {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 16px;
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info { padding-top: 8px; }
+
+    .contact-detail {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 4px;
+    }
+    .contact-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
       margin-bottom: 8px;
     }
 
-    /* Sidebar widgets */
-    .widget {
-      background-color: #ffff00;
-      border: 2px ridge #ff6600;
-      color: #000080;
-      font-size: 11px;
-      font-weight: bold;
-      padding: 6px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    .widget-title {
-      background-color: #ff0000;
-      color: #ffffff;
-      margin: -6px -6px 6px -6px;
-      padding: 2px;
-      font-size: 12px;
-    }
-
-    /* Spinning truck emoji replacement with CSS */
-    .spin {
-      display: inline-block;
-      animation: spin 3s linear infinite;
-    }
-    @keyframes spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-
-    /* Contact form */
-    .retro-form input,
-    .retro-form textarea,
-    .retro-form select {
-      background-color: #ffffff;
-      border: 2px inset #808080;
-      font-family: "Courier New", monospace;
-      font-size: 12px;
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
       width: 100%;
-      box-sizing: border-box;
-      margin-bottom: 6px;
-      padding: 3px;
-      color: #000080;
+      padding: 14px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--black);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
     }
-    .retro-form label {
-      font-size: 12px;
-      font-weight: bold;
-      color: #000080;
-      display: block;
-      margin-bottom: 2px;
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--black);
     }
-    .retro-btn {
-      background-color: #c0c0c0;
-      border: 3px outset #ffffff;
-      font-weight: bold;
-      font-size: 13px;
-      color: #000080;
-      padding: 4px 16px;
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--black);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
       cursor: pointer;
-      font-family: "Comic Sans MS", monospace;
+      transition: background 0.2s;
+      margin-top: 8px;
     }
-    .retro-btn:active {
-      border-style: inset;
+    .btn-submit:hover { background: var(--charcoal); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      padding: 60px 60px 40px;
     }
 
-    /* Footer */
-    .footer {
-      background-color: #000080;
-      color: #c0c0c0;
-      text-align: center;
-      font-size: 11px;
-      padding: 8px;
-      border-top: 3px ridge #ffffff;
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
     }
-    .footer a { color: #ffff00; }
 
-    /* Sidebar nav links */
-    .side-link {
-      display: block;
-      background-color: #ff6600;
-      color: #ffffff;
-      font-weight: bold;
-      font-size: 12px;
-      text-align: center;
-      padding: 4px;
-      margin-bottom: 6px;
-      border: 2px outset #ffffff;
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 20px;
+      letter-spacing: -0.2px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col ul a {
+      font-size: 14px;
+      color: var(--mid);
       text-decoration: none;
+      transition: color 0.2s;
     }
-    .side-link:hover { background-color: #ff0000; }
+    .footer-col ul a:hover { color: var(--black); }
 
-    /* Star separator */
-    .stars { color: #ffff00; font-size: 14px; letter-spacing: 4px; text-align: center; margin: 6px 0; }
-
-    /* "NEW!" gif-style badge */
-    .new-badge {
-      background-color: #ff0000;
-      color: #ffff00;
-      font-weight: bold;
-      font-size: 11px;
-      border: 2px outset #ffffff;
-      padding: 1px 5px;
-      display: inline-block;
-      animation: blinker 1s step-start infinite;
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
     }
 
-    /* Fake hit counter digits */
-    .digit {
-      display: inline-block;
-      background: #111;
-      color: #00ff00;
-      font-family: monospace;
-      font-size: 20px;
-      padding: 1px 4px;
-      border: 1px solid #00ff00;
-      margin: 0 1px;
+    .footer-bottom p {
+      font-size: 13px;
+      color: var(--light);
     }
 
-    .testimonial {
-      background-color: #ffffcc;
-      border-left: 4px solid #ff6600;
-      padding: 6px 10px;
-      margin-bottom: 8px;
-      font-size: 12px;
-      color: #000080;
-      font-style: italic;
+    .footer-bottom-links {
+      display: flex;
+      gap: 24px;
     }
-    .testimonial strong { color: #ff0000; }
+    .footer-bottom-links a {
+      font-size: 13px;
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-bottom-links a:hover { color: var(--black); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 60px;
+    }
   </style>
 </head>
 <body>
 
-<!-- TOP MARQUEE -->
-<div class="marquee-bar">
-  <marquee scrollamount="5">
-    &nbsp;&nbsp;&nbsp; 🚚 PUNKANAGEM — ENTREGAMOS SONHOS DESDE 2026! &nbsp;&nbsp;&nbsp; *** FRETE GRATIS PARA PEDIDOS ACIMA DE R$200 *** &nbsp;&nbsp;&nbsp; 📦 MAIS DE 10.000 ENTREGAS REALIZADAS! &nbsp;&nbsp;&nbsp; ☎️ LIGUE JA: (11) 9999-8888 &nbsp;&nbsp;&nbsp;
-  </marquee>
-</div>
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#">PUNKANAGEM<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#sobre">Sobre nós</a></li>
+      <li><a href="#depoimentos">Clientes</a></li>
+      <li><a href="#contato" class="nav-cta">Solicitar cotação</a></li>
+    </ul>
+  </nav>
 
-<!-- MAIN TABLE WRAPPER -->
-<div class="main-table">
-
-  <!-- HEADER -->
-  <div class="header">
-    <p class="site-title">🚚 PUNKANAGEM 🚚</p>
-    <p class="site-subtitle">
-      ★ A MELHOR TRANSPORTADORA DO BRASIL ★<br>
-      <span class="blink">*** ENTREGA RAPIDA E SEGURA ***</span>
-    </p>
-  </div>
-
-  <!-- NAVBAR -->
-  <div class="navbar">
-    <a href="#inicio">INICIO</a>
-    <a href="#servicos">SERVICOS</a>
-    <a href="#sobre">SOBRE NOS</a>
-    <a href="#depoimentos">DEPOIMENTOS</a>
-    <a href="#contato">CONTATO</a>
-  </div>
-
-  <!-- CONTENT AREA -->
-  <div class="content-area">
-
-    <!-- LEFT SIDEBAR -->
-    <div class="left-sidebar">
-
-      <div class="widget">
-        <div class="widget-title">📊 VISITAS</div>
-        Voce e o visitante<br>
-        <div class="counter-box">
-          <span class="digit">0</span><span class="digit">4</span><span class="digit">2</span><span class="digit">1</span><span class="digit">3</span><span class="digit">7</span>
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <div class="hero-tag">Transportadora Premium</div>
+      <h1>Entrega que vai<br><em>além.</em></h1>
+      <p class="hero-sub">
+        Fretes, encomendas e logística personalizada para empresas e pessoas — com segurança, pontualidade e cuidado em cada entrega.
+      </p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn-primary">Solicitar cotação</a>
+        <a href="#servicos" class="btn-ghost">Ver serviços</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">10k+</div>
+          <div class="stat-label">Entregas realizadas</div>
         </div>
-        Obrigado por visitar!
+        <div>
+          <div class="stat-num">98%</div>
+          <div class="stat-label">No prazo</div>
+        </div>
+        <div>
+          <div class="stat-num">15</div>
+          <div class="stat-label">Cidades atendidas</div>
+        </div>
       </div>
-
-      <div class="stars">★ ★ ★ ★ ★</div>
-
-      <a class="side-link" href="#servicos">📦 Encomendas</a>
-      <a class="side-link" href="#servicos">🏭 Cargas</a>
-      <a class="side-link" href="#servicos">🚀 Expresso</a>
-      <a class="side-link" href="#contato">📞 Cotacao</a>
-
-      <div class="stars">★ ★ ★ ★ ★</div>
-
-      <div class="widget">
-        <div class="widget-title">⏰ HORARIO</div>
-        Seg-Sex<br>
-        08h - 18h<br>
-        Sabado<br>
-        08h - 12h
-      </div>
-
-      <div class="widget">
-        <div class="widget-title">🌡️ TEMPO</div>
-        Sao Paulo<br>
-        ☀️ 24°C<br>
-        <small>Bom dia p/ entrega!</small>
-      </div>
-
     </div>
+    <div class="hero-image-wrap">
+      <img src="ChatGPT Image Jun 6, 2026, 01_56_50 AM.png" alt="Punkanagem — Frota de entrega">
+    </div>
+  </section>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-
-      <!-- HERO -->
-      <div class="section-box" id="inicio">
-        <div class="section-title">🏠 BEM-VINDO A PUNKANAGEM!</div>
-        <img src="ChatGPT Image Jun 6, 2026, 01_56_50 AM.png" alt="Punkanagem - Frota de entrega" class="hero-img">
-        <hr class="retro">
-        <p style="color:#000080; font-size:13px; text-align:center; margin:6px 0;">
-          <strong>PUNKANAGEM</strong> e a solucao completa para suas entregas!<br>
-          Com uma frota moderna e motoristas experientes, levamos seu produto<br>
-          com <span style="color:#ff0000; font-weight:bold;">SEGURANCA</span> e
-          <span style="color:#ff0000; font-weight:bold;">RAPIDEZ</span> a qualquer lugar do Brasil!
-        </p>
-        <div class="stars">✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦</div>
-        <p style="text-align:center; margin:0;">
-          <span class="new-badge">NOVO!</span>
-          <span style="color:#000080; font-size:12px;"> Rastreamento em tempo real disponivel!</span>
-        </p>
+  <!-- FEATURES -->
+  <section class="features" id="sobre">
+    <div class="features-header">
+      <div>
+        <div class="section-tag">Por que a Punkanagem</div>
+        <h2 class="section-title">Feito diferente, desde o início.</h2>
       </div>
+      <p style="font-size:15px; color:var(--mid); max-width:340px; line-height:1.7;">
+        Combinamos tecnologia, frota moderna e atendimento humano para oferecer uma experiência de entrega que você não vai encontrar em outro lugar.
+      </p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🚚</div>
+        <h3>Frota moderna</h3>
+        <p>Veículos novos, revisados e equipados com rastreamento em tempo real para sua tranquilidade.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📍</div>
+        <h3>Rastreamento ao vivo</h3>
+        <p>Acompanhe cada etapa da sua entrega diretamente pelo celular, sem precisar ligar para ninguém.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <h3>Atendimento dedicado</h3>
+        <p>Uma equipe real, disponível para resolver qualquer situação de forma rápida e sem complicação.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <h3>Carga segurada</h3>
+        <p>Todas as cargas transportadas possuem cobertura de seguro, porque sua mercadoria tem valor.</p>
+      </div>
+    </div>
+  </section>
 
-      <!-- SERVICOS -->
-      <div class="section-box" id="servicos">
-        <div class="section-title">📦 NOSSOS SERVICOS</div>
+  <div class="divider"></div>
+
+  <!-- SERVICES -->
+  <section id="servicos">
+    <div class="services-layout">
+      <div class="services-image">
+        <img src="ChatGPT Image Jun 6, 2026, 01_56_50 AM.png" alt="Serviços Punkanagem">
+      </div>
+      <div>
+        <div class="section-tag">Nossos serviços</div>
+        <h2 class="section-title">Tudo que você precisa, em um só lugar.</h2>
+        <p class="section-sub">Da encomenda expressa ao frete de grande porte, a Punkanagem tem a solução ideal para cada necessidade.</p>
         <ul class="services-list">
-          <li>Entrega Expressa (ate 24h)</li>
-          <li>Frete de Cargas (ate 3 toneladas)</li>
-          <li>Mudancas Residenciais e Comerciais</li>
-          <li>Encomendas Intermunicipais</li>
-          <li>Logistica para E-commerce</li>
-          <li>Coleta e Distribuicao</li>
-          <li>Transporte Refrigerado</li>
-          <li>Entrega Agendada</li>
+          <li class="service-item">
+            <div>
+              <div class="service-name">Entrega Expressa</div>
+              <div class="service-desc">Até 24 horas na região metropolitana</div>
+            </div>
+            <span class="service-arrow">→</span>
+          </li>
+          <li class="service-item">
+            <div>
+              <div class="service-name">Frete de Cargas</div>
+              <div class="service-desc">Até 3 toneladas com seguro incluso</div>
+            </div>
+            <span class="service-arrow">→</span>
+          </li>
+          <li class="service-item">
+            <div>
+              <div class="service-name">Mudanças Residenciais</div>
+              <div class="service-desc">Planejamento completo e equipe especializada</div>
+            </div>
+            <span class="service-arrow">→</span>
+          </li>
+          <li class="service-item">
+            <div>
+              <div class="service-name">Logística para E-commerce</div>
+              <div class="service-desc">Coleta, armazenagem e distribuição</div>
+            </div>
+            <span class="service-arrow">→</span>
+          </li>
+          <li class="service-item">
+            <div>
+              <div class="service-name">Transporte Agendado</div>
+              <div class="service-desc">Você escolhe o dia e horário</div>
+            </div>
+            <span class="service-arrow">→</span>
+          </li>
         </ul>
-        <hr class="retro">
-        <p style="color:#ff0000; font-weight:bold; font-size:12px; text-align:center; margin:4px 0;">
-          COBERTURA EM TODO O ESTADO DE SAO PAULO!
-        </p>
       </div>
+    </div>
+  </section>
 
-      <!-- SOBRE NOS -->
-      <div class="section-box" id="sobre">
-        <div class="section-title">🏢 SOBRE NOS</div>
-        <p style="color:#000080; font-size:12px; line-height:1.6; margin:0;">
-          A <strong>Punkanagem</strong> nasceu da paixao por logistica e compromisso com o cliente.
-          Fundada em 2026, ja realizamos milhares de entregas com sucesso em todo o Brasil.<br><br>
-          Nossa frota conta com veiculos modernos, equipados com GPS e sistema de rastreamento.
-          Nossos motoristas sao treinados e certificados para garantir que sua carga chegue
-          com seguranca e no prazo combinado.<br><br>
-          <strong style="color:#ff0000;">MISSAO:</strong> Entregar mais do que produtos — entregar confianca!<br>
-          <strong style="color:#ff0000;">VISAO:</strong> Ser a transportadora numero 1 do Brasil!<br>
-          <strong style="color:#ff0000;">VALORES:</strong> Pontualidade, Seguranca e Respeito ao Cliente.
-        </p>
-      </div>
-
-      <!-- DEPOIMENTOS -->
-      <div class="section-box" id="depoimentos">
-        <div class="section-title">⭐ DEPOIMENTOS</div>
-        <div class="testimonial">
-          "Encomenda chegou antes do prazo! Excelente servico!" <br>
-          <strong>— Joao S., Sao Paulo</strong>
-        </div>
-        <div class="testimonial">
-          "Melhor transportadora que ja usei! Super recomendo!" <br>
-          <strong>— Maria L., Campinas</strong>
-        </div>
-        <div class="testimonial">
-          "Profissionalismo total, minha carga chegou perfeita!" <br>
-          <strong>— Carlos M., Santos</strong>
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="depoimentos">
+    <div class="section-tag">O que dizem nossos clientes</div>
+    <h2 class="section-title">Confiança construída<br>entrega por entrega.</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars-row">★★★★★</div>
+        <p class="testimonial-text">"Minha encomenda chegou antes do prazo e em perfeito estado. Atendimento impecável do início ao fim. Não uso mais outra transportadora."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JS</div>
+          <div>
+            <div class="author-name">João S.</div>
+            <div class="author-loc">São Paulo, SP</div>
+          </div>
         </div>
       </div>
+      <div class="testimonial-card">
+        <div class="stars-row">★★★★★</div>
+        <p class="testimonial-text">"Usamos a Punkanagem para toda a logística do nosso e-commerce. Desde então, as reclamações de atraso caíram a zero. Melhor decisão que tomamos."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">ML</div>
+          <div>
+            <div class="author-name">Maria L.</div>
+            <div class="author-loc">Campinas, SP</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars-row">★★★★★</div>
+        <p class="testimonial-text">"Fizemos a mudança de um escritório inteiro com eles. Profissionalismo total, carga chegou perfeita e no horário combinado. Super recomendo."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">CM</div>
+          <div>
+            <div class="author-name">Carlos M.</div>
+            <div class="author-loc">Santos, SP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- CONTATO -->
-      <div class="section-box" id="contato">
-        <div class="section-title">📞 ENTRE EM CONTATO</div>
-        <form class="retro-form" onsubmit="alert('Mensagem enviada! Entraremos em contato em breve!'); return false;">
-          <label>SEU NOME:</label>
-          <input type="text" placeholder="Digite seu nome completo">
+  <!-- CONTACT -->
+  <section id="contato">
+    <div class="contact-layout">
+      <div class="contact-info">
+        <div class="section-tag">Fale conosco</div>
+        <h2 class="section-title">Vamos começar?</h2>
+        <p class="section-sub">Preencha o formulário ou entre em contato diretamente. Nossa equipe responde em até 2 horas.</p>
 
-          <label>EMAIL:</label>
+        <div class="contact-detail">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Telefone</div>
+            <div class="contact-value">(11) 9999-8888</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">E-mail</div>
+            <div class="contact-value">contato@punkanagem.com.br</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Endereço</div>
+            <div class="contact-value">Rua das Entregas, 77 — São Paulo, SP</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">⏰</div>
+          <div>
+            <div class="contact-label">Horário</div>
+            <div class="contact-value">Seg–Sex 08h–18h · Sáb 08h–12h</div>
+          </div>
+        </div>
+      </div>
+
+      <form onsubmit="alert('Mensagem enviada! Entraremos em contato em breve.'); return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" placeholder="Seu nome">
+          </div>
+          <div class="form-group">
+            <label>Telefone</label>
+            <input type="tel" placeholder="(11) 9xxxx-xxxx">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
           <input type="email" placeholder="seu@email.com.br">
-
-          <label>TELEFONE:</label>
-          <input type="tel" placeholder="(11) 9xxxx-xxxx">
-
-          <label>TIPO DE SERVICO:</label>
+        </div>
+        <div class="form-group">
+          <label>Serviço</label>
           <select>
-            <option>Selecione um servico...</option>
+            <option value="" disabled selected>Selecione um serviço</option>
             <option>Entrega Expressa</option>
             <option>Frete de Cargas</option>
-            <option>Mudanca Residencial</option>
-            <option>Logistica E-commerce</option>
+            <option>Mudança Residencial</option>
+            <option>Logística E-commerce</option>
+            <option>Transporte Agendado</option>
             <option>Outro</option>
           </select>
-
-          <label>MENSAGEM / DESCRICAO DA CARGA:</label>
-          <textarea rows="4" placeholder="Descreva sua necessidade..."></textarea>
-
-          <div style="text-align:center;">
-            <button type="submit" class="retro-btn">📨 ENVIAR MENSAGEM</button>
-            &nbsp;
-            <button type="reset" class="retro-btn">🗑️ LIMPAR</button>
-          </div>
-        </form>
-      </div>
-
+        </div>
+        <div class="form-group">
+          <label>Mensagem</label>
+          <textarea placeholder="Descreva sua necessidade..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar mensagem</button>
+      </form>
     </div>
-
-    <!-- RIGHT SIDEBAR -->
-    <div class="right-sidebar">
-
-      <div class="widget">
-        <div class="widget-title">📞 TELEFONE</div>
-        <strong>(11) 9999-8888</strong><br>
-        <small>Ligue agora!</small>
-      </div>
-
-      <div class="widget">
-        <div class="widget-title">📧 EMAIL</div>
-        <small>contato@<br>punkanagem<br>.com.br</small>
-      </div>
-
-      <div class="widget">
-        <div class="widget-title">📍 ENDERECO</div>
-        <small>Rua das Entregas, 77<br>Sao Paulo - SP<br>CEP 01310-000</small>
-      </div>
-
-      <div class="stars">★ ★ ★ ★ ★</div>
-
-      <div class="widget">
-        <div class="widget-title">🚚 NOSSA FROTA</div>
-        <small>
-          ✔ 15 Vans<br>
-          ✔ 8 Caminhoes<br>
-          ✔ 3 Baús<br>
-          ✔ GPS em todos
-        </small>
-      </div>
-
-      <div class="widget">
-        <div class="widget-title">🏆 PREMIOS</div>
-        <small>
-          ⭐ Melhor Frete SP 2025<br>
-          ⭐ Top Logistica 2026<br>
-          ⭐ 5 Estrelas Google
-        </small>
-      </div>
-
-      <div class="stars">★ ★ ★ ★ ★</div>
-
-      <div class="widget">
-        <div class="widget-title">🔗 LINKS</div>
-        <small>
-          <a href="#" style="color:#000080;">Instagram</a><br>
-          <a href="#" style="color:#000080;">Facebook</a><br>
-          <a href="#" style="color:#000080;">WhatsApp</a>
-        </small>
-      </div>
-
-    </div>
-  </div>
-  <!-- END CONTENT AREA -->
+  </section>
 
   <!-- FOOTER -->
-  <div class="footer">
-    <hr class="retro">
-    <marquee scrollamount="3" direction="right" style="font-size:11px; color:#ffff00;">
-      🚚 PUNKANAGEM &nbsp;|&nbsp; CNPJ: 00.000.000/0001-00 &nbsp;|&nbsp; Todos os direitos reservados © 2026 &nbsp;|&nbsp; 🚚
-    </marquee>
-    <br>
-    <span>Melhor visualizado em Internet Explorer 6.0 com resolucao 800x600</span><br>
-    <span>&#127968; Feito com ❤️ em Sao Paulo, Brasil</span><br>
-    <a href="#">[Voltar ao Topo]</a> &nbsp;|&nbsp;
-    <a href="#">[Mapa do Site]</a> &nbsp;|&nbsp;
-    <a href="#">[Fale Conosco]</a>
-  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#">PUNKANAGEM<span>.</span></a>
+        <p>Transportadora especializada em entregas rápidas, seguras e personalizadas para todo o estado de São Paulo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#">Entrega Expressa</a></li>
+          <li><a href="#">Frete de Cargas</a></li>
+          <li><a href="#">Mudanças</a></li>
+          <li><a href="#">E-commerce</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#">Sobre nós</a></li>
+          <li><a href="#">Nossa frota</a></li>
+          <li><a href="#">Trabalhe conosco</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="#">(11) 9999-8888</a></li>
+          <li><a href="#">contato@punkanagem.com.br</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Punkanagem Transportes. Todos os direitos reservados.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacidade</a>
+        <a href="#">Termos</a>
+        <a href="#">CNPJ: 00.000.000/0001-00</a>
+      </div>
+    </div>
+  </footer>
 
-</div>
-<!-- END MAIN TABLE -->
-
-<!-- BOTTOM MARQUEE -->
-<div class="marquee-bar" style="margin-top:8px;">
-  <marquee scrollamount="4" direction="right">
-    &nbsp;&nbsp;&nbsp; OBRIGADO PELA VISITA! &nbsp; ★ &nbsp; VOLTE SEMPRE! &nbsp; ★ &nbsp; PUNKANAGEM — CONFIANCA EM CADA ENTREGA! &nbsp;&nbsp;&nbsp;
-  </marquee>
-</div>
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
 
 </body>
 </html>
